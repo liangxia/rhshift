@@ -14,7 +14,7 @@ class PeriodicJob():
     def get_jobs(self, pattern='periodic-ci-', force=False):
         if force:
             regex = re.compile(pattern)
-            self.job_files = []
+            self.jobs.clear()
             for f in glob.glob(self.job_path + "/*-periodics.yaml", recursive=False):
                 with open(f) as _fobj:
                     for line in _fobj.readlines():
