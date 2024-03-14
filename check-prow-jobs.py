@@ -11,18 +11,17 @@ class PeriodicJob():
         self.job_path = os.path.join(repo_root, 'ci-operator/jobs', auto_repo)
         self.jobs = []
 
-    def get_jobs(self, pattern='periodic-ci-', force=False):
+    def get_jobs(self, force=False):
         if force:
-            regex = re.compile(pattern)
             self.jobs.clear()
+            regex = re.compile('periodic-ci-[-a-z0-9.]+')
             for f in glob.glob(self.job_path + "/*-periodics.yaml", recursive=False):
                 with open(f) as _fobj:
-                    for line in _fobj.readlines():
-                        if regex.search(line):
-                            self.jobs.append(line.split(':')[1].strip())
+                    jobs_infile = regex.findall(_fobj.read())
+                    self.jobs.extend(jobs_infile)
             self.jobs.sort(reverse=True)
         elif len(self.jobs) == 0:
-            self.get_jobs(pattern, force=True)
+            self.get_jobs(force=True)
 
     def count_jobs(self, patterns):
         self.get_jobs()
