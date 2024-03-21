@@ -36,7 +36,7 @@ class PeriodicJob():
             for fq in fqs:
                 fq_count = sum([pattern in j and bool(re.search(fq+'\\b', j)) for j in self.jobs])
                 if fq_count != 0:
-                    statements.append(f"\t\t{fq+':':<4}{str(fq_count):>4}\n")
+                    statements.append(f"\t\t{fq+':':>4}{fq_count:>4}\n")
         statements.append(f'Total jobs for all version: {len(self.jobs)}\n')
         print(*statements)
 
