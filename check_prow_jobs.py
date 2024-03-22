@@ -40,10 +40,9 @@ class PeriodicJob():
         statements.append(f'Total jobs for all version: {len(self.jobs)}\n')
         print(*statements)
 
-versions = list(range(16, 10, -1))
-patterns = ['release-4.' + str(s) for s in versions]
-patterns.append('master')
-cix = PeriodicJob()
-cix.count_jobs(patterns)
-ciy = PeriodicJob(auto_repo='openshift/verification-tests')
-ciy.count_jobs(patterns)
+if __name__ == '__main__':
+    patterns = ['release-4.' + str(v) for v in range(16, 10, -1)]
+    patterns.append('master')
+
+    ci = PeriodicJob()
+    ci.count_jobs(patterns)
