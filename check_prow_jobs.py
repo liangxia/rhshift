@@ -6,7 +6,7 @@ import os
 import re
 
 class PeriodicJob():
-    def __init__(self, auto_repo='openshift/openshift-tests-private', repo_root='/home/lxia/codes/github.com/release'):
+    def __init__(self, auto_repo='openshift/openshift-tests-private', repo_root='/home/lxia/codebases/github.com/release'):
         self.auto_repo = auto_repo
         self.repo_root = repo_root
         self.job_path = os.path.join(repo_root, 'ci-operator/jobs', auto_repo)
